@@ -10,7 +10,6 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-
   late PageController pageController;
   int currentIndex = 0;
 
@@ -65,14 +64,6 @@ class _IntroPageState extends State<IntroPage> {
               children: buildIndicator(),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 60),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: buildIndicator(),
-            ),
-          ),
-
         ],
       ),
     );
@@ -120,6 +111,11 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
+  Widget buildSkip() {
+    return Text("Skip",
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+  }
+
   Widget indicator(bool isActive) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
@@ -133,18 +129,14 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  Widget buildSkip(a) {
-    return Text("Skip");
-  }
-
   List<Widget> buildIndicator() {
     List<Widget> indicators = [];
     for (int i = 0; i < 3; i++) {
       if (currentIndex == i) {
-        if (currentIndex == 2) {
-          buildSkip(true);
-        }
         indicators.add(indicator(true));
+        if (currentIndex == 2) {
+          indicators.add(buildSkip());
+        }
       } else {
         indicators.add(indicator(false));
       }
